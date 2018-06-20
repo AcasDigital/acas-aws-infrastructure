@@ -1,0 +1,59 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Master template to set up alerting framework with AWS SNS topics, subscriptions etc.
+
+Parameters:
+  pSnsEmailAddress:
+    Description: Email address subscribed to the alerts
+    Type: String
+    Default: 'jabley@acas.org.uk'
+
+Resources:
+  rSev1SnsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        -
+          Endpoint: !Ref pSnsEmailAddress
+          Protocol: email
+      TopicName: "Sev1SnsTopic"
+
+  rSev2SnsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        -
+          Endpoint: !Ref pSnsEmailAddress
+          Protocol: email
+      TopicName: "Sev2SnsTopic"
+
+  rSev5SnsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        -
+          Endpoint: !Ref pSnsEmailAddress
+          Protocol: email
+      TopicName: "Sev5SnsTopic"
+
+####
+#### Output the most useful resources
+####
+Outputs:
+  rSev1SnsTopicArn:
+    Description: ARN of Severity 1 SNS topic
+    Value: !Ref rSev1SnsTopic
+    Export:
+      Name: !Sub "${AWS::StackName}-alert-rSev1SnsTopicArn"
+
+  rSev2SnsTopicArn:
+    Description: ARN of Severity 2 SNS topic
+    Value: !Ref rSev2SnsTopic
+    Export:
+      Name: !Sub "${AWS::StackName}-alert-rSev2SnsTopicArn"
+
+  rSev5SnsTopicArn:
+    Description: ARN of Severity 5 SNS topic
+    Value: !Ref rSev5SnsTopic
+    Export:
+      Name: !Sub "${AWS::StackName}-alert-rSev5SnsTopicArn"
