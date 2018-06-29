@@ -14,14 +14,24 @@ and UAT environments), and a prod account (containing the Prod environment).
 
 So for now, we're creating them in each account.
 
-For both prod and pre-prod, you'll need to do something like:
+**PLEASE NOTE**
+
+> All of the following CLI examples assume that your local AWS CLI
+> configuration has a profile named `acas-pre-prod` and `acas-prod`. If
+> your profiles are named differently, you will need to adjust
+> appropriately.
+
+For both the `acas-prod` and `acas-pre-prod` accounts, you'll need to
+do something like:
 
 ```
 pushd path/to/this/directory
 ACAS_APP=ops-alerts
 ACAS_ENV=pre-prod
-ACAS_ACCOUNT=563637730430
+ACAS_ACCOUNT=THE-ACCOUNT-ID
 ```
+
+ACAS_ENV should be one of `prod` or `pre-prod`.
 
 Package up your change:
 
